@@ -21,18 +21,12 @@ Every test sets is listed. Any pecularties are explained. Its suitablitliy for f
 
 ## 2020.07.10
 
-Tests was conducted using a tripod to hold the tracker and laser reflector and moved within a 1.5x2.50m space. The measurement points mentioned in the data set are marked within the sketch as points the random point are "randomly" located within the space. The origin is marked
-The laser tracker measuring procedure was as follows:
+Tests was conducted using a tripod to hold the tracker and laser reflector and moved within a 1.5x2.50m space. The measurement points mentioned in the data set are marked within the sketch as points the random point are "randomly" located within the space. The origin is marked as dot on the sketch. The tripod measurement procedure was used with the difference that per measurement position only one laser target (the one at the origin position on the connector plate) was measured in. 
+Thus the problem in this set was that the tripod was moved by hand thus introducing rotation. As only single point measurements were taken no information can be gained regarding the vive positional accuracy without using the vive rotational information. Therefore the position accuracy would become corrupted by the rotation accuracy.
 
-* Measure in 3 Points from which origin, x axis, y axis can be computated
-* Make a test measurement at y measurement point
-* Make a test measurement at the origin point
-* Make measurement point for each position 
-
-The problem in this set was that the tripod was moved by hand thus introducing rotation. As only single point measurements were taken no information can be gained regarding the vive positional accuracy without using the vive rotational information. Therefore the position accuracy would become corrupted by the rotation accuracy.
-
+The controller was placed in the middle to prevent recalibrating.
 <img src="./experimentSketches/20200710.jpg" width="480">
 
 ## 2020.07.17
-Two test were conducted with the same setup and procedure. The split was caused to the fact that the Vive Tracker run out of charge and had to be charged. For each measurement position, the laser targets were moved thus allowing to gauge an idea regarding positional and rotational accuracy. The proecdure for the laser tracker was 3 measurements to setup the coordinate system (origin->x->y) then test poitn at y and testpoint at origin. Afterwards for each measurment position the targets were measured and moved in the following fashion (origin position->x axis->y axis->origin position). Thus 4 measurements are taken for each position. The first and last measurements should be within the same (within the std of the laser tracker). 
+Two test were conducted with the same setup and procedure. The split was caused to the fact that the Vive Tracker run out of charge and had to be charged. The robot position measurement procedure was used.
 <img src="./experimentSketches/20200717.jpg" width="480">
