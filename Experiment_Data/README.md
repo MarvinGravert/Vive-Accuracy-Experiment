@@ -23,5 +23,6 @@ Every test sets is listed. Any pecularties are explained. Its suitablitliy for f
 
 Tests was 
 ![Sketch for EXP2020.07.10](./experimentSketches/20200710.jpg "test")
+<img src="./experimentSketches/20200710.jpg" width="48">
 
 ## 2020.07.17
