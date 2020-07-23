@@ -22,5 +22,6 @@ Every test sets is listed. Any pecularties are explained. Its suitablitliy for f
 ## 2020.07.10
 
 Tests was 
+![Sketch for EXP2020.07.10](./20200710.jpg "test")
 
 ## 2020.07.17
