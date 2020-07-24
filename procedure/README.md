@@ -1,8 +1,8 @@
 # Procedure of experiment to measure accuracy
 
-The procedure is broken up into 
+In the following the procedure is described
 
-## Baseline Preperation Positioning for Tripod experiments
+## Procedure Measurement for Tripod experiments
 
 1. Mount the Lighthouses at elevated positions at the edges of the workspace. For all experiments this position was noted down and publish along with the raw data
 2. Place the Tripod on which the Vive is mounted together with the connector plate on the workspace corner which will be signified as workspace origin. Using the tripod, a level position with the ground is attempted to be achieved
@@ -10,7 +10,7 @@ The procedure is broken up into
 4. Perform a test measurement at the y axis point to verify that the new coordinate system has been set correctly. Do the same for the origin position
 5. The Tripod setup is moved within the workspace at each point Vive tracker position data is recorded as well as the 4 target position. These target position are the origin, on the x and on the y-axis as well as again at the origin to verfiy correctness
 
-## Baseline Preperation Positioning for Robot Experiments
+## Procedure Measurement for Robot Experiments
 
 1. Mount the Lighthouses at elevated positions at the edges of the workspace. For all experiments this position was noted down and publish along with the raw data
 2. Mount the connector plate on the end effector and place Vive tracker and target holders 
@@ -18,7 +18,6 @@ The procedure is broken up into
 4. Perform a test measurement at the y axis point to verify that the new coordinate system has been set correctly. Do the same for the origin position
 5. The Robot setup is moved within the workspace at each point Vive tracker position data is recorded as well as the 4 target position. These target position are the origin, on the x and on the y-axis as well as again at the origin to verfiy correctness
 
-## Performing measurements
 
 
 
