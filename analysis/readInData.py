@@ -2,14 +2,14 @@
 ## used for vive tracker data as well as laser tracker data
 import numpy as np
 import os
-
+import logging
 
 def readViveData(fileLocation):
         return np.loadtxt(fileLocation, delimiter=" ", skiprows=2)
     
 def readLaserData(fileLocation):
 #     return np.loadtxt(fileLocation, delimiter=",", skiprows=2)
-        return np.genfromtxt(fileLocation,delimiter=',')
+        return np.genfromtxt(fileLocation,delimiter=',', skip_header=1)
 
 def getParentDirectoryLevelX(filename,x=1):
     ##finds the x level parent directory of the current working directory
@@ -32,7 +32,7 @@ def getMeasurementPointData(date, experimentNumber):
                         viveTrackerPointlist.append(readViveData(filepathToRead))
                         counter+=1
         except OSError :
-                pass
+                print("es wurden ", counter-1, "Punkte importiert")
         return viveTrackerPointlist
 
 

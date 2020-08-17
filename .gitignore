@@ -1,3 +1,4 @@
-test*.*
+# test*.*
 **/__pycache__/
-!/.vscode
+/.vscode
+*.egg-info
