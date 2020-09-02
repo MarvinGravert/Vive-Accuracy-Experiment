@@ -99,7 +99,7 @@ if __name__=="__main__":
     ######Analysis#######
     #calc the transformation between registrationpoint and x measurementpoint
     #compare the transformation with the one of the lasertracker (or rather the norm of the distance traveld)
-    for num in range(0,7):
+    for num in range(0,len(listMeasHomMatrix)):
 
         vive2=regHomMatrix@invertHomMatrix(listMeasHomMatrix[num])
 
