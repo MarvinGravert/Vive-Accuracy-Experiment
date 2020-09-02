@@ -15,7 +15,8 @@ def getStd(listOfDatSets):
 
 def turnViveDataIntoHomMatrix(viveData):
     meanData=viveData.mean(0)
-    meanRot=R.from_quat(meanData[3:])
+    w,i,j,k=meanData[3:]
+    meanRot=R.from_quat([i,j,k,w])
     meanVec=meanData[0:3]
     return turnIntoHomMatrix(meanRot,meanVec)
 
@@ -48,27 +49,24 @@ def buildHomMatrixfromLaser(args):
     #take three data points from laserpoint data which forms on KOS
     #calc the transform also transform into m (from mm)
     zeroPoint,xPoint,yPoint=args
+
+
     xAxis=xPoint-zeroPoint
     yAxis=yPoint-zeroPoint
     xAxis=xAxis/np.linalg.norm(xAxis)
     yAxis=yAxis/np.linalg.norm(yAxis)
     zAxis=np.cross(xAxis,yAxis)
-    yAxis=np.cross(xAxis,zAxis)
+    yAxis=np.cross(zAxis,xAxis)
     tempMatrix=np.array([xAxis,yAxis,zAxis])
     tempVector=-tempMatrix.dot(zeroPoint )
     
     return turnIntoHomMatrix(tempMatrix,tempVector/1000)   
 
-if __name__=="__main__":
-    #define which dataset
-    experimentNumber="1"
-    date="20200827"
-    #set transformation between reflectors and trakcer
-    offset=10
-    matrixLaser2Vive=np.array([[-1,0,0],[0,0,1],[0,1,0]])
-    vectorLaser2Vive=np.array([72,offset,-72])
-    homMatrixLaser2Vive=turnIntoHomMatrix(matrixLaser2Vive,vectorLaser2Vive/1000)
-    
+def getMatrices(experimentNumber,date):
+    ##RESULT 3 Matrices:
+    #Homogenous Matrix  Lighthouse to Tracker at zero: registration point
+    #list ofHomMatrix: Vive2Tracker at x measurement Points 
+    #list HomMatrix: zero lasertracker to x measuremetn point (laser2measurement Point
     #read data into Matrix
     laserData=readInData.getLaserData(date, experimentNumber)
     regViveData=readInData.getRegistrationPointData(date,experimentNumber)
@@ -92,17 +90,46 @@ if __name__=="__main__":
     for i in range(0,len(relLaserData),3):
         tmp=[relLaserData[i],relLaserData[i+1],relLaserData[i+2]]
         laserHomMatrix.append(buildHomMatrixfromLaser(tmp))
-    ##RESULT 3 Matrices:
-    #Homogenous Matrix  Lighthouse to Tracker at zero: registration point
-    #list ofHomMatrix: Vive2Tracker at x measurement Points 
-    #list HomMatrix: zero lasertracker to x measuremetn point (laser2measurement Point
+    return [regHomMatrix,listMeasHomMatrix,laserHomMatrix]
+
+if __name__=="__main__":
+    #define which dataset
+    experimentNumber="1"
+    date="20200827"
+    #set transformation between reflectors and trakcer
+    offset=10
+    #black
+    matrixLaser2Vive=np.array([[-1,0,0],[0,0,1],[0,1,0]])
+    vectorLaser2Vive=np.array([72,offset,-72])
+    #red
+    matrixLaser2Vive=np.array([[0,0,-1],[-1,0,0],[0,1,0]])
+    vectorLaser2Vive=np.array([72,offset,72])/1000
+    homMatrixLaser2Vive=turnIntoHomMatrix(matrixLaser2Vive,vectorLaser2Vive)
+    # print(homMatrixLaser2Vive)
+    
+    
+    regHomMatrix,listMeasHomMatrix,laserHomMatrix=getMatrices(experimentNumber,date)
+    # print(laserHomMatrix)
     ######Analysis#######
     #calc the transformation between registrationpoint and x measurementpoint
     #compare the transformation with the one of the lasertracker (or rather the norm of the distance traveld)
-    for num in range(0,len(listMeasHomMatrix)):
+    for num in range(0,len(listMeasHomMatrix)): 
 
         vive2=regHomMatrix@invertHomMatrix(listMeasHomMatrix[num])
 
         v1=np.linalg.norm(vive2[0:3,3])
         l1=np.linalg.norm(laserHomMatrix[num][0:3,3])
-        print((v1-l1)*1000)
+        # print((v1-l1)*1000)
+    # p=np.array([72,offset,72,1000])/1000
+    # t=listMeasHomMatrix[0]@p
+    # t0=regHomMatrix@p
+    # print(t)
+    # print(t0)
+    # print(t-t0)
+    # print(np.linalg.norm(t-t0))
+
+    t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
+    print(t)
+    t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[0])@regHomMatrix@homMatrixLaser2Vive
+    print(t)
+    print(laserHomMatrix[0])
