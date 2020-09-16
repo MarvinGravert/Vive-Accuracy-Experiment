@@ -20,19 +20,23 @@ This experiment will compare the accuracy of the lighthouse system depending on 
 
 The general setup is as follows.
 
-* Marking out a 3x3m area.
-* Placing the lighthouses as marked out in the sheet 4m from the center
-* The Lighthouses are put to maximum height of the tracker and put at  a 30° angle to the horizont
+* Marking out a 3x3m area, equaly spaced 9 points for rough orientation
+* Placing the lighthouses as marked out in the sheet 4m from the center. Setup for a)
+* The Lighthouses are put to maximum height of the tracker and put at  a a slight angle to the horizont
+* The corner points are checked for coverage with the individual vive Tracker
 * The lasertracked is positioned somewhere more than 1.5m from the marked out area
 * The Vive tracker is placed on the ground mounted on the adapter (see picture which is to be added)
-* Now the distances to the lighthouses are taken using the Vive system (this is done to later accuractly plot the positions)
+* Now the distances to the lighthouses are taken using the Vive system (this is done to later accuractly plot the positions, orientations of lighthouse )
+* Afterwards the tracker is mounted on the tripod in the lowest height setting
 * The laser tracker measures the target at the 3 postiions marekd out on the tracker. Origin of connector-X Axis-Y Axis
 
 ### Actual Procedure
 
-1. Moutn adapter onto to tripod. 
-2. Move the tripod 
-
+1. Mount adapter onto to tripod.
+2. Move the tripod within the workspace in a strucutred manner. 3 Heights. 9 Points per Level. Roughly the same position 0 1,5 3
+3. Afterwards do random points for setup roughly 10
+4. Change Setup to b (recharge Charger)
+5. Repeat process for b)
 
 ## Procedure Measurement for Robot Experiments
 
@@ -45,3 +49,9 @@ The general setup is as follows.
 ## Procedure Finding Center of Lighthouse
 
 Mounting the 
+
+## Procedure Veryfying Position Plane inclination 
+
+1. Place Lighthouse on ground
+2. Move Tracker to different position on the ground
+3. Check if all tracker points are on the same plane
