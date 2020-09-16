@@ -3,6 +3,7 @@
 This folder contains several subfolders which each contain data from one test set. This includes data from teh vie and the laser tracker as well as a YAML regarding the setup (position of lighthouses and laser tracker in regards to the measurement workspace). These workspace measurements are very rough if nothing else has been noted down. All data is raw data extracted from the software. Not Alteration or Processing has been done. Further down each testSet will be explained
 
 ## General Settings
+
 The data from the Vive is extracted via [triadOpenVR wrapper](https://github.com/TriadSemi/triad_openvr). On a Windows 10 64bit system. For each position the vive tracker is kept stationary and 1000 measurement points are taken at a freq = 120Hz
 The data from the Laser tracker is extracted via software and tranfered to Laptop as .txt or .csv.
 The laser tracker is used with TBR 0.5 inch laser reflectors
@@ -25,8 +26,21 @@ Tests was conducted using a tripod to hold the tracker and laser reflector and m
 Thus the problem in this set was that the tripod was moved by hand thus introducing rotation. As only single point measurements were taken no information can be gained regarding the vive positional accuracy without using the vive rotational information. Therefore the position accuracy would become corrupted by the rotation accuracy.
 
 The controller was placed in the middle to prevent recalibrating.
+
 <img src="./experimentSketches/20200710.jpg" width="480">
 
 ## 2020.07.17
+
 Two test were conducted with the same setup and procedure. The split was caused to the fact that the Vive Tracker run out of charge and had to be charged. The robot position measurement procedure was used.
+
 <img src="./experimentSketches/20200717.jpg" width="480">
+
+## 2020.08.20
+
+This experiemtn does not contain laser data as the laser tracker was not available. Instead the vive tracker was placed on a table this table was moved within the workspace.
+
+## 2020.08.27
+
+Standard procedure
+
+<img src="./experimentSketches/20200827.jpg" width="480">

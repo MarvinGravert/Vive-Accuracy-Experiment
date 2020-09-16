@@ -1,4 +1,5 @@
-# import Analysis.readInData as readInData
+#!/usr/bin/env python3
+# # import Analysis.readInData as readInData
 import analysis.readInData as readInData
 import numpy as np
 from scipy.spatial.transform import Rotation as R
@@ -24,7 +25,7 @@ def turnIntoHomMatrix(matrix,vec):
     # print(matrix.as_matrix())
     # print(vec)
     below=np.array([[0,0,0,1]])
-    tempVec=np.array(vec).reshape(3,1)
+    tempVec=np.array(vec).reshape([3,1])
     # print(tempVec)
     
     try:
@@ -49,8 +50,7 @@ def buildHomMatrixfromLaser(args):
     #take three data points from laserpoint data which forms on KOS
     #calc the transform also transform into m (from mm)
     zeroPoint,xPoint,yPoint=args
-
-
+    
     xAxis=xPoint-zeroPoint
     yAxis=yPoint-zeroPoint
     xAxis=xAxis/np.linalg.norm(xAxis)
@@ -58,9 +58,12 @@ def buildHomMatrixfromLaser(args):
     zAxis=np.cross(xAxis,yAxis)
     yAxis=np.cross(zAxis,xAxis)
     tempMatrix=np.array([xAxis,yAxis,zAxis])
-    tempVector=-tempMatrix.dot(zeroPoint )
     
-    return turnIntoHomMatrix(tempMatrix,tempVector/1000)   
+    tempMatrix=np.array([xAxis,yAxis,zAxis]).transpose()
+    tempMatrix=np.linalg.inv(tempMatrix)
+    tempVector=-tempMatrix.dot(zeroPoint/1000)
+    
+    return turnIntoHomMatrix(tempMatrix,tempVector)   
 
 def getMatrices(experimentNumber,date):
     ##RESULT 3 Matrices:
@@ -93,6 +96,7 @@ def getMatrices(experimentNumber,date):
     return [regHomMatrix,listMeasHomMatrix,laserHomMatrix]
 
 if __name__=="__main__":
+    
     #define which dataset
     experimentNumber="1"
     date="20200827"
@@ -103,6 +107,7 @@ if __name__=="__main__":
     vectorLaser2Vive=np.array([72,offset,-72])
     #red
     matrixLaser2Vive=np.array([[0,0,-1],[-1,0,0],[0,1,0]])
+    matrixLaser2Vive=np.linalg.inv(matrixLaser2Vive.transpose())
     vectorLaser2Vive=np.array([72,offset,72])/1000
     homMatrixLaser2Vive=turnIntoHomMatrix(matrixLaser2Vive,vectorLaser2Vive)
     # print(homMatrixLaser2Vive)
@@ -115,7 +120,7 @@ if __name__=="__main__":
     #compare the transformation with the one of the lasertracker (or rather the norm of the distance traveld)
     for num in range(0,len(listMeasHomMatrix)): 
 
-        vive2=regHomMatrix@invertHomMatrix(listMeasHomMatrix[num])
+        vive2=listMeasHomMatrix[num]@invertHomMatrix(regHomMatrix)
 
         v1=np.linalg.norm(vive2[0:3,3])
         l1=np.linalg.norm(laserHomMatrix[num][0:3,3])
@@ -128,8 +133,26 @@ if __name__=="__main__":
     # print(t-t0)
     # print(np.linalg.norm(t-t0))
 
-    t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
+    # t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
+    # print(t)
+    t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[2])@regHomMatrix@homMatrixLaser2Vive
     print(t)
-    t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[0])@regHomMatrix@homMatrixLaser2Vive
-    print(t)
-    print(laserHomMatrix[0])
+    print(laserHomMatrix[2])
+    # vive2=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
+    # print(vive2)
+
+
+
+
+
+    # s=buildHomMatrixfromLaser([np.array([3.0,0.0,0.0]),np.array([3.0,2.0,0.0]), np.array([-1.0,0.0,0.0])])#
+    # print(s)
+    # a=np.array([-4485.1332,660.3783,-395.7873])
+    # b=np.array([-4584.3205,734.3694,-390.3263])
+    # c=np.array([-4559.0378,561.0136,-396.2159])
+    # d=np.array([-4584.3205,734.3694,-390.3263,1000]).reshape([4,1])/1000#c=y axis
+
+    # t=buildHomMatrixfromLaser([a,b,c])
+    # print(t)
+    # print(t@d)
+    
