@@ -56,7 +56,8 @@ def buildHomMatrixfromLaser(args):
     xAxis=xAxis/np.linalg.norm(xAxis)
     yAxis=yAxis/np.linalg.norm(yAxis)
     zAxis=np.cross(xAxis,yAxis)
-    yAxis=np.cross(zAxis,xAxis)
+    # yAxis=np.cross(zAxis,xAxis)
+    # xAxis=np.cross(zAxis,yAxis)
     tempMatrix=np.array([xAxis,yAxis,zAxis])
     
     tempMatrix=np.array([xAxis,yAxis,zAxis]).transpose()
@@ -98,8 +99,10 @@ def getMatrices(experimentNumber,date):
 if __name__=="__main__":
     
     #define which dataset
-    experimentNumber="1"
-    date="20200827"
+    experimentNumber="2"
+    date="20200717"
+    # date="20200717"
+    date="20200917"
     #set transformation between reflectors and trakcer
     offset=10
     #black
@@ -107,8 +110,9 @@ if __name__=="__main__":
     vectorLaser2Vive=np.array([72,offset,-72])
     #red
     matrixLaser2Vive=np.array([[0,0,-1],[-1,0,0],[0,1,0]])
+    matrixLaser2Vive=np.array([[0,1,0],[1,0,0],[0,0,-1]])#fixed so that this aligns
     matrixLaser2Vive=np.linalg.inv(matrixLaser2Vive.transpose())
-    vectorLaser2Vive=np.array([72,offset,72])/1000
+    vectorLaser2Vive=np.array([72,offset,72])/-1000
     homMatrixLaser2Vive=turnIntoHomMatrix(matrixLaser2Vive,vectorLaser2Vive)
     # print(homMatrixLaser2Vive)
     
@@ -121,10 +125,12 @@ if __name__=="__main__":
     for num in range(0,len(listMeasHomMatrix)): 
 
         vive2=listMeasHomMatrix[num]@invertHomMatrix(regHomMatrix)
+        vive2=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[num])@regHomMatrix@homMatrixLaser2Vive
 
         v1=np.linalg.norm(vive2[0:3,3])
         l1=np.linalg.norm(laserHomMatrix[num][0:3,3])
         # print((v1-l1)*1000)
+        print(np.sqrt(((v1-l1)*1000)**2))
     # p=np.array([72,offset,72,1000])/1000
     # t=listMeasHomMatrix[0]@p
     # t0=regHomMatrix@p
@@ -133,15 +139,13 @@ if __name__=="__main__":
     # print(t-t0)
     # print(np.linalg.norm(t-t0))
 
+
+    ##testing transformation 
     # t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
     # print(t)
     t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[2])@regHomMatrix@homMatrixLaser2Vive
-    print(t)
-    print(laserHomMatrix[2])
-    # vive2=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
-    # print(vive2)
-
-
+    # print(t)
+    # print(laserHomMatrix[14])
 
 
 

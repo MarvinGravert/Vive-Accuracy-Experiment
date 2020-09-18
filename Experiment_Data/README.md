@@ -44,3 +44,15 @@ This experiemtn does not contain laser data as the laser tracker was not availab
 Standard procedure
 
 <img src="./experimentSketches/20200827.jpg" width="480">
+
+## 2020.09.17
+
+Experiment 90° orientation of the LHs to one another
+Initally measured the Lighthouse position from the center of the field of observation (LH-main. LH-aux). 
+3 Levels with 9 points per level
+Afterwards collected 8 random points
+Experiment 1 is the 3x9 points
+Experiment 2 is the 3x9 points + 8 random points.
+
+## 2020.09.18
+
