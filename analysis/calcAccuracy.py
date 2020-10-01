@@ -68,8 +68,8 @@ def buildHomMatrixfromLaser(args):
     # xAxis=np.cross(zAxis,yAxis)
     tempMatrix=np.array([xAxis,yAxis,zAxis])
     
-    tempMatrix=np.array([xAxis,yAxis,zAxis]).transpose()
-    tempMatrix=np.linalg.inv(tempMatrix)
+    # tempMatrix=np.array([xAxis,yAxis,zAxis]).transpose()
+    # tempMatrix=np.linalg.inv(tempMatrix)
     tempVector=-tempMatrix.dot(zeroPoint/1000)
     
     return turnIntoHomMatrix(tempMatrix,tempVector)   
@@ -134,13 +134,15 @@ if __name__=="__main__":
     accArray=[]
     for num in range(0,len(listMeasHomMatrix)): 
 
-        vive2=listMeasHomMatrix[num]@invertHomMatrix(regHomMatrix)
+        # vive2=listMeasHomMatrix[num]@invertHomMatrix(regHomMatrix)
         vive2=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[num])@regHomMatrix@homMatrixLaser2Vive
 
         v1=np.linalg.norm(vive2[0:3,3])
         l1=np.linalg.norm(laserHomMatrix[num][0:3,3])
         # print((v1-l1)*1000)
-        print(np.sqrt(((v1-l1)*1000)**2))
+        # print(np.sqrt(((v1-l1)*1000)**2))
+        # sumAcc+=np.sqrt(((v1-l1)*1000)**2)
+        print(np.linalg.norm(((v1-l1)*1000)))
         sumAcc+=np.sqrt(((v1-l1)*1000)**2)
         accArray.append(np.sqrt(((v1-l1)*1000)**2))
     sumAcc/=len(listMeasHomMatrix)
@@ -159,8 +161,8 @@ if __name__=="__main__":
     # t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
     # print(t)
     t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[3])@regHomMatrix@homMatrixLaser2Vive
-    print(t)
-    print(laserHomMatrix[3])
+    # print(t)
+    # print(laserHomMatrix[3])
     # x is correct
     # y needs to be -z
     # z needs to be y
