@@ -121,6 +121,13 @@ if __name__=="__main__":
     # matrixLaser2Vive=np.array([[0,1,0],[1,0,0],[0,0,-1]])#fixed so that this aligns
     matrixLaser2Vive=np.linalg.inv(matrixLaser2Vive.transpose())
     vectorLaser2Vive=np.array([62,offset,62])/1000#solid mistake 72 statt 62...
+    ##Trialed this
+    matrixLaser2Vive=np.array([[0,0,1],[1,0,0],[0,-1,0]])
+    
+    vectorLaser2Vive=np.array([offset,-62,62])/1000
+    ##trial 2
+    # matrixLaser2Vive=np.array([[0,1,0],[-1,0,0],[0,0,1]])
+    # vectorLaser2Vive=np.array([-62,62,offset])/1000
     homMatrixLaser2Vive=turnIntoHomMatrix(matrixLaser2Vive,vectorLaser2Vive)
     # print(homMatrixLaser2Vive)
     
@@ -161,8 +168,8 @@ if __name__=="__main__":
     # t=invertHomMatrix(homMatrixLaser2Vive)@listMeasHomMatrix[0]@invertHomMatrix(regHomMatrix)@homMatrixLaser2Vive
     # print(t)
     t=invertHomMatrix(homMatrixLaser2Vive)@invertHomMatrix(listMeasHomMatrix[3])@regHomMatrix@homMatrixLaser2Vive
-    # print(t)
-    # print(laserHomMatrix[3])
+    print(t)
+    print(laserHomMatrix[3])
     # x is correct
     # y needs to be -z
     # z needs to be y

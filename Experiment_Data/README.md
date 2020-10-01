@@ -56,6 +56,8 @@ Experiment 2 is the 3x9 points + 8 random points.
 
 ## 2020.09.18
 
-
+Exp1 is one plane measuremnts 
 Exp2
 at measurement point 18 or rather point 1 level 3 the laser tracker data istn available
+hence deleted
+This is also the case for Exp3 which is the extended one to Exp2 
