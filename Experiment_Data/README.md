@@ -61,3 +61,45 @@ Exp2
 at measurement point 18 or rather point 1 level 3 the laser tracker data istn available
 hence deleted
 This is also the case for Exp3 which is the extended one to Exp2 
+
+
+## 2020.10.01
+
+Exp 1 and Exp 2 doen wiht 180° 
+All measurements worked. 
+Problem rotation of the coordiante system
+Exp 2 is Exp plus added random points
+
+## 2020.10.02
+Exp1
+20min Drift
+Setup 
+Vive on a tripod, roughly level to the ground. LH are placed 180°, at roughly . Vive bottom is at roughly 600mm, LH Center at roughly 130 above ground=> See the LH_180° 
+
+Procedure
+5Hz 60*20*5 measurements 
+Results:
+Take last 10 sec and first 10 sec
+
+Exp2
+Drei Experimente
+Recalibration Experiment
+Setup
+Vive on a tripod, roughly level to the ground. LH are placed 180°, at roughly . Vive bottom is at roughly 600mm, LH Center at roughly 130 above ground=> See the LH_180° 
+A controller remains in view
+
+Procedure
+Position tracker for 100 measurements thenput carton over him for 25seconds. Then let tracking regain and measure
+
+Setup
+Same as before but instead there is no controller in the view
+
+Procedure
+Same
+
+Setup 
+Same
+Procedure
+Same as before but instead of putting carton above tracker. SteamVr is shutdown and restarted
+
+Exp3
