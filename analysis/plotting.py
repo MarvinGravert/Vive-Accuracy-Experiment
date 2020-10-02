@@ -20,19 +20,21 @@ def plotXY(list_hom_Vive,list_hom_laser):
     print("\n")
     print(list_Vive_XY)
 if __name__=="__main__":
-    # data=ana.getDataPairs().listDataPairs
+    data=ana.getDataPairs().listDataPairs
     pairs=ana.getDataPairs()
     pairs.showResults()
+    pairs.showResultsDistance()
     hom_vive=pairs.getListHomMatrixVive_ViveRef()
     hom_laser=pairs.getListHomMatrixLaser_ViveRef()
-    plotXY(hom_vive,hom_laser)
+    # plotXY(hom_vive,hom_laser)
     # t=pairs.getListHomMatrixVive()
     # print(t)
-    # num=4
-    # print("Vive Complete")
-    # print(data[num].hom_Vive_registration2measurement)
-    # print("Laser")
-    # print(ana.calculate_hom_laser2Vive()@data[num].laserDataPoint.hom_registration2measurement@ana.invertHomMatrix(ana.calculate_hom_laser2Vive()))
-    # print("Vive incompelte")
-    # print(data[num].viveDataPoint.hom_regis2Measurment)
+    num=10#startin at 0 going through measurement points
+    print("Vive Complete")
+    print(data[num].hom_Vive_registration2measurement)
+    print("Laser")
+    #print(ana.calculate_hom_laser2Vive()@data[num].laserDataPoint.hom_registration2measurement@ana.invertHomMatrix(ana.calculate_hom_laser2Vive()))
+    print(data[num].laserDataPoint.hom_registration2measurement)
+    print("Vive incompelte")
+    print(data[num].viveDataPoint.hom_regis2Measurment)
 

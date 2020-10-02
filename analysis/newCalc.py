@@ -58,12 +58,19 @@ class ViveDataPoint():
         Output: Homogenous matrix represnting the transformation
         '''    
         meanData=viveData.mean(0)#average across all rows
-        w,i,j,k=meanData[3:]
-        meanRot=R.from_quat([w,i,j,k])
-        # meanRot=R.from_quat([i,j,k,w])
-        meanVec=meanData[0:3]*1000#m->mm
-        return makeHomogenousMatrix(meanRot,meanVec)
-
+        #handle quaternions and homogenous matrix
+        if len(meanData)==7:
+            w,i,j,k=meanData[3:]
+            meanRot=R.from_quat([w,i,j,k])
+            # meanRot=R.from_quat([i,j,k,w])
+            meanVec=meanData[0:3]*1000#m->mm
+            return makeHomogenousMatrix(meanRot,meanVec)
+        if len(meanData)==12:
+            meanRot=np.array([meanData[0:3],meanData[4:7],meanData[8:11]])
+            meanVec=np.array([meanData[3],meanData[7],meanData[11]])*1000
+            return makeHomogenousMatrix(meanRot,meanVec)
+        else:
+            logging.warning("Something went wrong with the vive data import")
     
 
 class CollectionDataPairs():
@@ -100,6 +107,9 @@ class CollectionDataPairs():
     def showResults(self):
         print(f"Overall Accuracy: {self.acc}")
         print(f"Standard deviation: {self.std}")
+    def showResultsDistance(self):
+        for i in self.listDataPairs:
+            print(i.distanceAcc)
 
 class DataPair():
     def __init__(self,viveDataPoint, LaserDataPoint,hom_laser2vive):
@@ -348,7 +358,7 @@ def getDataPairs():
     return CollectionDataPairs(list_dataPairs)
 
 if __name__=="__main__":
-    # main()
-    t=np.array([[-0.05826370418071747, 0.9980254173278809, 0.02346029318869114, -1.4323045015335083], [-0.008331798948347569, 0.02301337756216526, -0.9997003078460693, -0.6669083833694458], [-0.998266339302063, -0.05844183266162872, 0.00697462260723114, -0.9444524645805359],[0,0,0,1]])
-    print(t)
-    print(invertHomMatrix(t))
+    main()
+    # t=np.array([[-0.05826370418071747, 0.9980254173278809, 0.02346029318869114, -1.4323045015335083], [-0.008331798948347569, 0.02301337756216526, -0.9997003078460693, -0.6669083833694458], [-0.998266339302063, -0.05844183266162872, 0.00697462260723114, -0.9444524645805359],[0,0,0,1]])
+    # print(t)
+    # print(invertHomMatrix(t))
