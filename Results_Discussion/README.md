@@ -14,3 +14,12 @@ Like screw in the bottom and then screw in the back to really align the 2?
 
 
 No head mounted => Drift in position of controller
+
+
+
+## versuch design für roboter
+
+Inertialle Kalibrierung sollte möglichst im besten punkt gemacht werden. Sprich Hololens in die Mitte legen, Roboterarm in die Mitte bringen. Kalibrieren. Dann die Position des Roboterarmes nehmen und abspeicher und mit seiner Transformation abgleichen,
+
+
+Mache Point matching zwischen Robot TCP und Vive Tracker. So kommt man an die beste Transformation zwischen Robot und Vive System. Diese Kalibrierung am Anfang. Also einmal Hololens LH kalibriern und einmal Robot Vive kalibrieren
