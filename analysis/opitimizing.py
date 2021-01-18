@@ -113,13 +113,22 @@ def print4Settings(R):
 
 
 if __name__ == "__main__":
+    # initialze optimizer
     test = FindOptimal()
+    # Use scipy optimizer for rotation with specified initial value
     # mat = np.array([[1, 0, 0], [0, 0, -1], [0, -1, 0]])
     # res = test.useScipy(Rotation.from_matrix(mat).as_quat())
-    # res = test.useScipy_fullmatrix()
-    # tempR = Rotation.from_quat(res.x)
     # print(res)
+    # #print to get string compatible with settings.ini format
+    # Using the rotation library to normalize the quaternion
+    # tempR = Rotation.from_quat(res.x)
     # print4Settings(np.linalg.inv(tempR.as_matrix()))
+    # run scipy optimzer on rotation+translation
+    res = test.useScipy_fullmatrix()
+    print(res)
+    tempR = Rotation.from_quat(res.x[:4])
+    print4Settings(np.linalg.inv(tempR.as_matrix()))
+
+    # Genetic algorithms
     # test.use_genetic_algo()
-    # test.useScipy()
-    test.use_genetic_algo_fullmatrix()
+    # test.use_genetic_algo_fullmatrix()
