@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # print(groundThruth[val]-compari[val])
     diff_matrix_list = list()
     for true_val, compare_val in zip(groundThruth, compari):
-        diff_matrix_list.append((true_val-compare_val))
+        diff_matrix_list.append(true_val-compare_val)
     diff_vector_list = [x[:3, 3] for x in diff_matrix_list]
     print_magntude_diff_vector(diff_matrix_list)
 """
